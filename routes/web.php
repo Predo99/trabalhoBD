@@ -29,7 +29,7 @@ Route::view('/criar', 'criar');
 Route::get('/teste', 'UsuarioController@index');
 Route::get('/usuarios/{usuario}', 'UsuarioController@show')->name('usuarios.show');
 Route::get('/quests/{usuario}/{quest}', 'QuestController@show')->name('quests.show');
-
+Route::post('/missoes/{usuario}/{quest}','QuestController@ver')->name('missoes.ver');
 // Route::view('/', 'login');
 // Route::get('/usuario/login', 'Auth\UsuarioLoginController@showLoginForm')->name('usuario.login');
 // Route::post('/usuario/login', 'Auth\UsuarioLoginController@login')->name('usuario.login.submit');

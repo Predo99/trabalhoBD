@@ -4,8 +4,8 @@
 
 <style>
     body{
-        position: fixed; 
-        top: 0; 
+        position: fixed;
+        top: 0;
         left: 0;
         background-image: url('{{ asset ('images/tavern.jpg')}}');
         background-repeat: no-repeat;
@@ -14,10 +14,10 @@
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-        height: 100vh;    
+        height: 100vh;
         /* Preserve aspet ratio */
-        min-width: 100%;   
-        min-height: 100%;   
+        min-width: 100%;
+        min-height: 100%;
     }
 
     #profile_picture{
@@ -28,7 +28,7 @@
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     li{
         display:inline-block;
         padding-inline-start: 5%;
@@ -44,13 +44,13 @@
             </div>
             <div>
                 <h3 style="display:inline-block; margin-left:3%">
-                    Nível: 
+                    Nível:
                     <h3 style="display:inline-block;"> {{$usuario->nivel}}</h3>
-                </h3> 
+                </h3>
             </div>
             <div>
                 <h3 style="display:inline-block; margin-left:3%">
-                    Dinheiro: R$ 
+                    Dinheiro: R$
                     <h3 style="display:inline-block;"> {{$usuario->gold}}</h3>
                 </h3>
             </div>
@@ -60,7 +60,7 @@
             <div>
                 <a href="">
                     <i class="fa fa-fw fa-power-off" style="font-size: 30px; position:absolute; bottom:1%; right:2%; color:white;  "></i>
-                </a>    
+                </a>
             </div>
         </div>
     </div>
@@ -70,15 +70,15 @@
             <h1 style="text-align:center; padding-top:1%;">Missões</h1>
             <ul style="white-space:nowrap; padding-bottom:1%; margin-left:10%; margin-right:85%;">
                 @php
-                    $missoes = DB::select('select * from quest where nivel = ?', [$usuario->nivel]);   
+                    $missoes = DB::select('select * from quest where nivel = ?', [$usuario->nivel]);
                 @endphp
-                
+
                 @foreach ($missoes as $missao)
                     <li>
-                        <a class="btn btn-primary" 
+                        <a class="btn btn-primary"
                         href="{{ route('quests.show', ['usuario' => $usuario->nomeu, 'quest' => $missao->id_quest]) }}" >
                         <h3>{{$missao->tipo}}{{$missao->nivel}}</h3></a>
-                    </li>    
+                    </li>
                 @endforeach
             </ul>
         </div>

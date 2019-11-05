@@ -12,10 +12,10 @@
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-        height: 100vh;    
+        height: 100vh;
         /* Preserve aspet ratio */
-        min-width: 100%;   
-        min-height: 100%;   
+        min-width: 100%;
+        min-height: 100%;
     }
 
 </style>
@@ -30,8 +30,9 @@
                     @php
                         $perguntas = DB::select('select * from pergunta where id_quest = ?', [$quest->id_quest]);
                     @endphp
+                    <form action="{{ route('missoes.ver', ['usuario' => $usuario->nomeu, 'quest' => $quest->id_quest]) }}" method="post">
                     @foreach ($perguntas as $pergunta)
-                        <div class="form-group">
+                        <div class="form-group" >
                             <p style="font-size:18px">{{$pergunta->descricao}}</p>
                              @php
                                 $opcoes =  DB::select('select * from opcao where id_pergunta = ?', [$pergunta->id_pergunta]);
@@ -40,17 +41,20 @@
                                 <div class="radio">
                                     <div class="o1">
                                         <label>
-                                            <input type="radio" name="opcao1" id="optionsRadios1" value="{{$opcao->indice}}" >
+                                            <input type="checkbox" name="opcao{{$pergunta->id_pergunta}}{{$opcao->indice}}" id="optionsRadios1" value="{{$opcao->indice}}" >
                                             {{$opcao->descricao}}
                                         </label>
                                     </div>
                                 </div>
-                            @endforeach  
+                            @endforeach
                         </div>
-                        <hr>
+
                     @endforeach
-                    <a href="/missao" class="btn bg-black">Responder</a>
-                </div> 
+                        <hr>
+                        @csrf
+                    <button class="btn bg-black">Responder</button>
+                    </form>
+                </div>
 
             </div>
 
