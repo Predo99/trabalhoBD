@@ -4,9 +4,12 @@
 
 <style>
     body{
+<<<<<<< HEAD
         position: fixed;
         top: 0;
         left: 0;
+=======
+>>>>>>> 2bc0daa7179bfb1a41c93663d96bccf3d5f21cb2
         background-image: url('{{ asset ('images/tavern.jpg')}}');
         background-repeat: no-repeat;
         background-position: center center;
@@ -28,10 +31,19 @@
         margin-left: auto;
         margin-right: auto;
     }
+<<<<<<< HEAD
 
     li{
+=======
+    
+    li.a{
+>>>>>>> 2bc0daa7179bfb1a41c93663d96bccf3d5f21cb2
         display:inline-block;
         padding-inline-start: 5%;
+    }
+    li.b{
+        list-style-type: none;
+        margin-left:3%
     }
 </style>
 
@@ -56,6 +68,15 @@
             </div>
             <div>
                 <h3 style="margin-left:3%">Badges: </h3>
+                @php
+                    $badgesganhas = DB::select('select * from ganha where nomeu = ?', [$usuario->nomeu]);   
+                @endphp
+                @foreach ($badgesganhas as $badgeganha)
+                    @php
+                        $badge = DB::select('select * from badge where nomeb = ?', [$badgeganha->nomeb]);
+                    @endphp
+                    <li class="b" style="color:red"><h3>{{$badge[0]->nomeb}}{{$badge[0]->nivel}}</h3></li>    
+                @endforeach
             </div>
             <div>
                 <a href="">
@@ -74,8 +95,13 @@
                 @endphp
 
                 @foreach ($missoes as $missao)
+<<<<<<< HEAD
                     <li>
                         <a class="btn btn-primary"
+=======
+                    <li class="a">
+                        <a class="btn btn-primary" 
+>>>>>>> 2bc0daa7179bfb1a41c93663d96bccf3d5f21cb2
                         href="{{ route('quests.show', ['usuario' => $usuario->nomeu, 'quest' => $missao->id_quest]) }}" >
                         <h3>{{$missao->tipo}}{{$missao->nivel}}</h3></a>
                     </li>

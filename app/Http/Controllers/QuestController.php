@@ -14,6 +14,7 @@ class QuestController extends Controller
         return view('missao', compact('usuario', 'quest'));
     }
 
+<<<<<<< HEAD
     public function ver($nome, $iquest){
 
         $usuario = \App\Usuario::findOrFail($nome);
@@ -46,4 +47,24 @@ class QuestController extends Controller
         return redirect('/usuarios/'.$usuario->nomeu );
     }
 
+=======
+    // public function showq(Quest $quest)
+    // {
+    //     return view('missaoview', compact('quest'));
+    // }
+
+    public function showq ($tipo, Quest $quest)
+    {
+        $npc = \App\Npc::findOrFail($tipo);
+        return view('missaoview', compact('npc', 'quest'));
+    }
+
+    public function destroy($npc, Quest $quest)
+    {
+        $NPC = DB::select('select * from npc where tipo = ?', [$npc]);
+        $deleted = DB::delete('delete from quest where id_quest = ?', [$quest->id_quest]);
+
+        return redirect('/npcs/'. $NPC[0]->tipo);
+    }
+>>>>>>> 2bc0daa7179bfb1a41c93663d96bccf3d5f21cb2
 }
