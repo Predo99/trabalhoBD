@@ -22,13 +22,16 @@ Auth::routes();
 // });
 
 // Route::view('/', 'auth/login');
-// Route::view('/missao', 'missao')->name('usuario.missao');
+// Route::view('/missao', 'missao');
 Route::view('/criar', 'criar');
 // Route::view('/home', 'home');
 
 Route::get('/teste', 'UsuarioController@index');
 Route::get('/usuarios/{usuario}', 'UsuarioController@show')->name('usuarios.show');
+Route::get('/npcs/{npc}', 'NpcController@show')->name('npcs.show');
 Route::get('/quests/{usuario}/{quest}', 'QuestController@show')->name('quests.show');
+Route::get('/npcs/{npc}/{quest}', 'QuestController@showq')->name('quests.showq');
+Route::delete('/npcs/{npc}/{quest}', 'QuestController@destroy');
 
 // Route::view('/', 'login');
 // Route::get('/usuario/login', 'Auth\UsuarioLoginController@showLoginForm')->name('usuario.login');

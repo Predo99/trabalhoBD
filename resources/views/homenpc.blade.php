@@ -1,6 +1,6 @@
 @extends('adminlte::layout')
 
-@section('title', 'Home')
+@section('title', 'HomeNPC')
 
 <style>
     body{
@@ -25,47 +25,33 @@
         margin-left: auto;
         margin-right: auto;
     }
-    
-    li.a{
-        display:inline-block;
-        padding-inline-start: 5%;
-    }
-    li.b{
-        list-style-type: none;
-        margin-left:3%
-    }
 </style>
 
 @section('content')
     <div class="row">
         <div class="bg-black" style="width:20%; height:100%; position:absolute; top:0; bottom:0;">
             <div>
-                <h1 style="text-align:center">{{$usuario->nomeu}}</h1>
+                <h1 style="text-align:center">{{$npc->nomen}}</h1>
                 <img src="{{asset('images/warrior.jpg')}}" id="profile_picture" alt=""></img>
             </div>
             <div>
                 <h3 style="display:inline-block; margin-left:3%">
-                    Nível: 
-                    <h3 style="display:inline-block;"> {{$usuario->nivel}}</h3>
+                    Tipo: 
+                    <h3 style="display:inline-block;">{{$npc->tipo}}</h3>
                 </h3> 
             </div>
             <div>
-                <h3 style="display:inline-block; margin-left:3%">
-                    Dinheiro: R$ 
-                    <h3 style="display:inline-block;"> {{$usuario->gold}}</h3>
-                </h3>
-            </div>
-            <div>
-                <h3 style="margin-left:3%">Badges: </h3>
-                @php
-                    $badgesganhas = DB::select('select * from ganha where nomeu = ?', [$usuario->nomeu]);   
-                @endphp
-                @foreach ($badgesganhas as $badgeganha)
+                <h3 style="margin-left:3%">Missoes: </h3>
+                <ul>
                     @php
-                        $badge = DB::select('select * from badge where nomeb = ?', [$badgeganha->nomeb]);
+                    $missoes = DB::select('select * from quest where tipo = ?', [$npc->tipo]);   
                     @endphp
-                    <li class="b" style="color:red"><h3>{{$badge[0]->nomeb}}{{$badge[0]->nivel}}</h3></li>    
-                @endforeach
+                    @foreach ($missoes as $missao)
+                        <li>
+                            <a href="{{ route('quests.showq', ['npc' => $npc->tipo, 'quest' => $missao->id_quest]) }}"><h3>Nível: {{$missao->nivel}}</h3></a>
+                        </li>   
+                    @endforeach
+                 </ul>
             </div>
             <div>
                 <a href="">
@@ -77,20 +63,26 @@
 
     <div class="row">
         <div class="bg-black" style="margin-left:30%; margin-right:10%; max-width:60%">
-            <h1 style="text-align:center; padding-top:1%;">Missões</h1>
-            <ul style="white-space:nowrap; padding-bottom:1%; margin-left:10%; margin-right:85%;">
+            <h1 style="text-align:center; padding-top:1%;">Criar missão</h1>
+            <div style="padding-left:33%; padding-bottom:1%">
+                <a class="btn btn-primary" href="/criar">
+                        <h3>Clique aqui para criar uma nova missão</h3>
+                </a>
+            </div>
+            
+            {{-- <ul style="white-space:nowrap; padding-bottom:1%; margin-left:10%; margin-right:85%;">
                 @php
                     $missoes = DB::select('select * from quest where nivel = ?', [$usuario->nivel]);   
                 @endphp
                 
                 @foreach ($missoes as $missao)
-                    <li class="a">
+                    <li>
                         <a class="btn btn-primary" 
                         href="{{ route('quests.show', ['usuario' => $usuario->nomeu, 'quest' => $missao->id_quest]) }}" >
                         <h3>{{$missao->tipo}}{{$missao->nivel}}</h3></a>
                     </li>    
                 @endforeach
-            </ul>
+            </ul> --}}
         </div>
     </div>
 @endsection
