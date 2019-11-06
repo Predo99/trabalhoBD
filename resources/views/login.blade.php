@@ -17,13 +17,13 @@
 @section('body')
     <div class="login-box">
         <div class="login-logo">
-            
+
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
             <h1 style="text-align:center; font-weight: bold;">LOGIN</h1>
             {{-- <p class="login-box-msg">{{ __('adminlte::adminlte.login_message') }}</p> --}}
-            <form action="{{route('usuario.login.submit')}}" method="post" >
+            <form action="" method="post" >
                 {{ csrf_field() }}
 
                 <div class="form-group has-feedback {{ $errors->has('nomeu') ? 'has-error' : '' }}">
@@ -55,12 +55,12 @@
             </form>
             <br>
             <p>
-                <a href="#" class="text-center">
+                <a href="/user/create" class="text-center">
                     Cadastrar usuário
                 </a>
             </p>
             <p>
-                <a href="#" class="text-center">
+                <a href="/create" class="text-center">
                     Cadastrar NPC
                 </a>
             </p>

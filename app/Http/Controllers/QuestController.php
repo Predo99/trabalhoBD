@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Npc;
 use App\Quest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,40 +15,35 @@ class QuestController extends Controller
         return view('missao', compact('usuario', 'quest'));
     }
 
-<<<<<<< HEAD
     public function ver($nome, $iquest){
 
         $usuario = \App\Usuario::findOrFail($nome);
 
         $perguntas = DB::select('select * from pergunta where id_quest =?',[$iquest]);
         $count=0;
-        for($i=1;$i<=3;$i++){
-            for ($j=1;$j<=3;$j++){
-                if( $perguntas[$i-1]->resposta == request()->input('opcao'.$i.$j)){
-                    $count++;
-                }
-            }
-        }
+       for($i=0;$i<3;$i++){
+           if(request()->input('opcao'.$perguntas[$i]->id_pergunta.$perguntas[$i]->resposta)){
+               $count++;
+           }
+       }
+
+        $quest = Quest::findOrFail($iquest);
 
         if($count>=2){
-            $aux=$usuario->gold + $usuario->nivel*500;
-            $aux2=$usuario->nivel+1;
             DB::table('usuario')
                 ->where("usuario.nomeu", '=', $usuario->nomeu)
-                ->update(['usuario.gold' => $aux]);
+                ->update(['usuario.gold' => $usuario->gold + $quest->nivel*500]);
             DB::table('usuario')
                 ->where("usuario.nomeu", '=', $usuario->nomeu)
-                ->update(['usuario.nivel' => $aux2]);
+                ->update(['usuario.nivel' => $usuario->nivel+1]);
         }else{
-            $aux=$usuario->gold - ($usuario->nivel/2)*500;
             DB::table('usuario')
                 ->where("usuario.nomeu", '=', $usuario->nomeu)
-                ->update(['usuario.gold' => $aux]);
+                ->update(['usuario.gold' => $usuario->gold - ($quest->nivel/2)*500]);
         }
         return redirect('/usuarios/'.$usuario->nomeu );
-    }
 
-=======
+    }
     // public function showq(Quest $quest)
     // {
     //     return view('missaoview', compact('quest'));
@@ -66,5 +62,67 @@ class QuestController extends Controller
 
         return redirect('/npcs/'. $NPC[0]->tipo);
     }
->>>>>>> 2bc0daa7179bfb1a41c93663d96bccf3d5f21cb2
+
+    public function create($tipo){
+        $npc = Npc::findOrFail($tipo);
+        $quest = new Quest();
+
+        return view('/criar',compact('quest','npc'));
+    }
+
+    public function store($tipo){
+
+        $aux=[0];
+        for($i=1;$i<=3;$i++){
+            for ($j=1;$j<=4;$j++) {
+                if (request()->input('opcao'.$i.$j) != null) {
+                    $aux[$i-1] = $j;
+                }
+            }
+        }
+
+         DB::insert('insert into quest (tipo,nivel,informacao) values (?,?,?)',
+             [$tipo,request()->input('lvl'),request()->input('info')]);
+
+         $max = DB::select('select id_quest from quest where id_quest=(select max(id_quest) from quest)');
+
+         DB::insert('insert into pergunta (descricao,resposta,id_quest) values (?,?,?)',
+             [request()->input('pgt1'),$aux[0],$max[0]->id_quest]);
+         DB::insert('insert into pergunta (descricao,resposta,id_quest) values (?,?,?)',
+             [request()->input('pgt2'),$aux[1],$max[0]->id_quest]);
+         DB::insert('insert into pergunta (descricao,resposta,id_quest) values (?,?,?)',
+             [request()->input('pgt3'),$aux[2],$max[0]->id_quest]);
+
+         $id_pgt = DB::select('select * from pergunta where id_quest =(select id_quest from quest where id_quest=(select max(id_quest) from quest))');
+
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [1, $id_pgt[0]->id_pergunta ,request()->input('r11')]);
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [2, $id_pgt[0]->id_pergunta ,request()->input('r12')]);
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [3, $id_pgt[0]->id_pergunta ,request()->input('r13')]);
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [4, $id_pgt[0]->id_pergunta ,request()->input('r14')]);
+
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [1, $id_pgt[1]->id_pergunta ,request()->input('r21')]);
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [2, $id_pgt[1]->id_pergunta ,request()->input('r22')]);
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [3, $id_pgt[1]->id_pergunta ,request()->input('r23')]);
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [4, $id_pgt[1]->id_pergunta ,request()->input('r24')]);
+
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [1, $id_pgt[2]->id_pergunta ,request()->input('r31')]);
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [2, $id_pgt[2]->id_pergunta ,request()->input('r32')]);
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [3, $id_pgt[2]->id_pergunta ,request()->input('r33')]);
+         DB::insert('insert into opcao (indice,id_pergunta,descricao) values (?,?,?)',
+             [4, $id_pgt[2]->id_pergunta ,request()->input('r34')]);
+
+
+        return redirect('/npcs/'.$tipo);
+    }
 }

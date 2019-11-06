@@ -33,6 +33,19 @@ class UsuarioController extends Controller
     //         if ($user[0]->senha == $senha)
     //             dd($user[0]->senha);
     //     }
-    //     dd($nome); 
+    //     dd($nome);
     // }
+
+    public function create(){
+        $usuario = new Usuario();
+
+        return view('/criaruser',compact('usuario'));
+    }
+
+    public function store(){
+
+        DB::insert('insert into usuario (nomeu,gold,nivel,senha) values (?,?,?,?)',
+            [request()->input('nomeu'),0,1,request()->input('senha')]);
+        return redirect('/');
+    }
 }
