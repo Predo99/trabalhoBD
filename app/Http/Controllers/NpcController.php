@@ -23,6 +23,9 @@ class NpcController extends Controller
 
        DB::insert('insert into npc (nomen,senha,tipo) values (?,?,?)' ,
            [request()->input('nomen'),request()->input('senha'),request()->input('tipo')]);
+
+       DB::insert('insert into badge (nomeb,nivel) values (?,?)',
+           [request()->input('tipo'),1]);
        return redirect('/');
     }
 }

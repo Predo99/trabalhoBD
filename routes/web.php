@@ -29,7 +29,7 @@ Route::get('/teste', 'UsuarioController@index');
 Route::get('/usuarios/{usuario}', 'UsuarioController@show')->name('usuarios.show');
 Route::get('/npcs/{npc}', 'NpcController@show')->name('npcs.show');
 Route::get('/quests/{usuario}/{quest}', 'QuestController@show')->name('quests.show');
-Route::post('/missoes/{usuario}/{quest}','QuestController@ver')->name('missoes.ver');
+Route::post('/missoes/{usuario}/{quest}/{data}/{hora}','QuestController@ver')->name('missoes.ver');
 Route::get('/npcs/{npc}/{quest}', 'QuestController@showq')->name('quests.showq');
 Route::delete('/npcs/{npc}/{quest}', 'QuestController@destroy');
 

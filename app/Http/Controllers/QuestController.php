@@ -15,7 +15,7 @@ class QuestController extends Controller
         return view('missao', compact('usuario', 'quest'));
     }
 
-    public function ver($nome, $iquest){
+    public function ver($nome, $iquest,$data,$hora){
 
         $usuario = \App\Usuario::findOrFail($nome);
 
@@ -28,7 +28,7 @@ class QuestController extends Controller
        }
 
         $quest = Quest::findOrFail($iquest);
-
+        $status=0;
         if($count>=2){
             DB::table('usuario')
                 ->where("usuario.nomeu", '=', $usuario->nomeu)
@@ -36,11 +36,22 @@ class QuestController extends Controller
             DB::table('usuario')
                 ->where("usuario.nomeu", '=', $usuario->nomeu)
                 ->update(['usuario.nivel' => $usuario->nivel+1]);
+            $status='Aprovado';
         }else{
             DB::table('usuario')
                 ->where("usuario.nomeu", '=', $usuario->nomeu)
                 ->update(['usuario.gold' => $usuario->gold - ($quest->nivel/2)*500]);
+            $status='Reprovado';
         }
+
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataf = date('d-m-y');
+        $horaf = date('h:i:s');
+
+        DB::insert('insert into realiza (nomeu,id_quest,status,data_ini,data_fim,hora_ini,hora_fim) values(?,?,?,?,?,?,?)',
+        [$usuario->nomeu,$quest->id_quest,$status,$data,$dataf,$hora,$horaf]);
+
+
         return redirect('/usuarios/'.$usuario->nomeu );
 
     }

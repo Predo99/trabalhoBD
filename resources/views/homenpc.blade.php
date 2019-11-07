@@ -64,7 +64,7 @@
     <div class="row">
         <div class="bg-black" style="margin-left:30%; margin-right:10%; max-width:60%">
             <h1 style="text-align:center; padding-top:1%;">Criar missão</h1>
-            <div style="padding-left:33%; padding-bottom:1%">
+            <div style="padding-left:27%; padding-bottom:1%">
                 <a class="btn btn-primary" href="/criar/{{$npc->tipo}}">
                         <h3>Clique aqui para criar uma nova missão</h3>
                 </a>
