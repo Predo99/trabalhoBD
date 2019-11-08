@@ -18,41 +18,61 @@ class QuestController extends Controller
     public function ver($nome, $iquest,$data,$hora){
 
         $usuario = \App\Usuario::findOrFail($nome);
-
-        $perguntas = DB::select('select * from pergunta where id_quest =?',[$iquest]);
-        $count=0;
-       for($i=0;$i<3;$i++){
-           if(request()->input('opcao'.$perguntas[$i]->id_pergunta.$perguntas[$i]->resposta)){
-               $count++;
-           }
-       }
-
         $quest = Quest::findOrFail($iquest);
-        $status=0;
-        if($count>=2){
-            DB::table('usuario')
-                ->where("usuario.nomeu", '=', $usuario->nomeu)
-                ->update(['usuario.gold' => $usuario->gold + $quest->nivel*500]);
-            DB::table('usuario')
-                ->where("usuario.nomeu", '=', $usuario->nomeu)
-                ->update(['usuario.nivel' => $usuario->nivel+1]);
-            $status='Aprovado';
-        }else{
-            DB::table('usuario')
-                ->where("usuario.nomeu", '=', $usuario->nomeu)
-                ->update(['usuario.gold' => $usuario->gold - ($quest->nivel/2)*500]);
-            $status='Reprovado';
-        }
 
-        date_default_timezone_set('America/Sao_Paulo');
-        $dataf = date('d-m-y');
-        $horaf = date('h:i:s');
+                $perguntas = DB::select('select * from pergunta where id_quest =?',[$iquest]);
+                $count=0;
+               for($i=0;$i<3;$i++){
+                   if(request()->input('opcao'.$perguntas[$i]->id_pergunta.$perguntas[$i]->resposta)){
+                       $count++;
+                   }
+               }
 
-        DB::insert('insert into realiza (nomeu,id_quest,status,data_ini,data_fim,hora_ini,hora_fim) values(?,?,?,?,?,?,?)',
-        [$usuario->nomeu,$quest->id_quest,$status,$data,$dataf,$hora,$horaf]);
+                if($count>=2){
+                    DB::table('usuario')
+                        ->where("usuario.nomeu", '=', $usuario->nomeu)
+                        ->update(['usuario.gold' => $usuario->gold + $quest->nivel*500]);
+                    DB::table('usuario')
+                        ->where("usuario.nomeu", '=', $usuario->nomeu)
+                        ->update(['usuario.nivel' => $usuario->nivel+1]);
+
+                    date_default_timezone_set('America/Sao_Paulo');
+                    $dataf = date('d-m-y');
+                    $horaf = date('h:i:s');
+
+                    DB::insert('insert into realiza (nomeu,id_quest,data_ini,data_fim,hora_ini,hora_fim) values(?,?,?,?,?,?)',
+                        [$usuario->nomeu,$quest->id_quest,$data,$dataf,$hora,$horaf]);
 
 
-        return redirect('/usuarios/'.$usuario->nomeu );
+                }else{
+                    DB::table('usuario')
+                        ->where("usuario.nomeu", '=', $usuario->nomeu)
+                        ->update(['usuario.gold' => $usuario->gold - ($quest->nivel/2)*500]);
+                }
+
+                  $teste=  DB::select('select count(*) from ganha where nomeu=? and nomeb=?',[$usuario->nomeu,$quest->tipo]);
+                  if($teste[0]->count ==0) {
+                      DB::insert('insert into ganha (nomeu,nomeb) values (?,?)',
+                          [$usuario->nomeu,$quest->tipo]);
+                  }
+                if($usuario->nivel>=3){
+                    $tester=  DB::select('select count(*) from realiza as r, quest as q  where nomeu=? and q.tipo = ? and q.id_quest=r.id_quest',
+                        [$usuario->nomeu,$quest->tipo]);
+                    if($tester[0]->count == 3){
+                        DB::insert('insert into ganha (nomeu,nomeb) values (?,?)',
+                            [$usuario->nomeu,$quest->tipo.'3']);
+                    }
+                }
+                if($usuario->nivel>=6){
+                    $tester=  DB::select('select count(*) from realiza as r, quest as q  where nomeu=? and q.tipo = ? and q.id_quest=r.id_quest',
+                        [$usuario->nomeu,$quest->tipo]);
+                    if($tester[0]->count == 6){
+                        DB::insert('insert into ganha (nomeu,nomeb) values (?,?)',
+                            [$usuario->nomeu,$quest->tipo.'3']);
+                    }
+                }
+
+                return redirect('/usuarios/'.$usuario->nomeu );
 
     }
     // public function showq(Quest $quest)

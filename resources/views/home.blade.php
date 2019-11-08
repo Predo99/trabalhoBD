@@ -67,7 +67,7 @@
                     @php
                         $badge = DB::select('select * from badge where nomeb = ?', [$badgeganha->nomeb]);
                     @endphp
-                    <li class="b" style="color:red"><h3>{{$badge[0]->nomeb}}{{$badge[0]->nivel}}</h3></li>
+                    <li class="b" style="color:red"><h3>{{$badge[0]->nomeb}} {{$badge[0]->nivel}}</h3></li>
                 @endforeach
             </div>
             <div>
