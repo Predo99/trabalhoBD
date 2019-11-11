@@ -23,7 +23,7 @@
             <h3 style="text-align:center; padding-top:1%;">Criar NPC</h3>
             <div class="box-body">
                 <div class="form-group">
-                    <form action="/" method="post">
+                    <form action="/" method="post" enctype="multipart/form-data">
                         <label><strong>Nome NPC :</strong></label>
                         <input class="form-control" name="nomen" id="nomen" type="text" placeholder="Nome">
                         @error('nomen') <b style="color:red">{{$message}}</b> @enderror
@@ -33,6 +33,26 @@
                         <label><strong>Senha NPC :</strong></label>
                         <input class="form-control" name="senha" id="senha" type="password">
                         @error('senha') <b style="color:red">{{$message}}</b> @enderror
+                        <div class="form-group d-flex flex-column">
+                            <label for="imagem">Profile Image</label>
+                            <input type="file" name="imagem" class="py-2">
+                            <div>{{ $errors->first('imagem') }}</div>
+                        </div>
+                        <div class="form-group d-flex flex-column">
+                            <label for="bd1">BD1 Image</label>
+                            <input type="file" name="bd1" class="py-2">
+                            <div>{{ $errors->first('bd1') }}</div>
+                        </div>
+                        <div class="form-group d-flex flex-column">
+                            <label for="bd2">BD2 Image</label>
+                            <input type="file" name="bd2" class="py-2">
+                            <div>{{ $errors->first('bd2') }}</div>
+                        </div>
+                        <div class="form-group d-flex flex-column">
+                            <label for="bd3">BD3 Image</label>
+                            <input type="file" name="bd3" class="py-2">
+                            <div>{{ $errors->first('bd3') }}</div>
+                        </div>
                             <hr>
                             @csrf
                         <button type="submit" class="btn bg-black">Confirmar</button>

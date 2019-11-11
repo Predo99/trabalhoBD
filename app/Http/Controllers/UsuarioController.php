@@ -42,10 +42,27 @@ class UsuarioController extends Controller
         return view('/criaruser',compact('usuario'));
     }
 
-    public function store(){
+    public function converterImagem($input)
+    {
+        $path = $input->getRealPath();
+        $file = file_get_contents($path);
+        $bin = base64_encode($file);
 
-        DB::insert('insert into usuario (nomeu,gold,nivel,senha) values (?,?,?,?)',
-            [request()->input('nomeu'),0,1,request()->input('senha')]);
+        return $bin;
+    }
+
+    public function store()
+    {
+        if(request()->file('imagem')!=null) {
+            $imagem = $this->converterImagem(request()->file('imagem'));
+            DB::insert('insert into usuario (nomeu,gold,nivel,senha, imagem) values (?,?,?,?,?)',
+                [request()->input('nomeu'), 0, 1, request()->input('senha'), $imagem]);
+        }else{
+            DB::insert('insert into usuario (nomeu,gold,nivel,senha, imagem) values (?,?,?,?,?)',
+                [request()->input('nomeu'), 0, 1, request()->input('senha'), null]);
+        }
         return redirect('/');
     }
+
+
 }

@@ -28,6 +28,16 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    #badge_picture{
+        width: 45%;
+        height: 15%;
+        border-radius: 50%;
+        display: block;
+        margin-left: 0%;
+        margin-right: auto;
+    }
+
     li.a{
         display:inline-block;
         padding-inline-start: 5%;
@@ -44,7 +54,7 @@
         <div class="bg-black" style="width:20%; height:100%; position:absolute; top:0; bottom:0;">
             <div>
                 <h1 style="text-align:center">{{$usuario->nomeu}}</h1>
-                <img src="{{asset('images/warrior.jpg')}}" id="profile_picture" alt=""></img>
+                <img src="data:image/jpeg;base64,{{$usuario->imagem}}" id="profile_picture" alt=""></img>
             </div>
             <div>
                 <h3 style="display:inline-block; margin-left:3%">
@@ -67,7 +77,11 @@
                     @php
                         $badge = DB::select('select * from badge where nomeb = ?', [$badgeganha->nomeb]);
                     @endphp
-                    <li class="b" style="color:red"><h3>{{$badge[0]->nomeb}} {{$badge[0]->nivel}}</h3></li>
+                    <li class="b" style="color:red">
+                        <img src="data:image/jpeg;base64,{{$badge[0]->imagem}}" id="badge_picture" alt="" data-toggle="tooltip" data-placement="top" title="{{$badge[0]->nomeb}} {{$badge[0]->nivel}}"></img>
+                        <h3>
+
+                        </h3></li>
                 @endforeach
             </div>
             <div>

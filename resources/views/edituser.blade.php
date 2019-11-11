@@ -20,18 +20,20 @@
 @section('content')
     <div style="width:50%; margin-left:25%; margin-right:25%">
         <div class="box box-solid" style="max-width:100%">
-            <h3 style="text-align:center; padding-top:1%;">Criar Usuário</h3>
+            <h3 style="text-align:center; padding-top:1%;">Editar Usuário</h3>
             <div class="box-body">
                 <div class="form-group">
-                    <form action="/st" method="post" enctype="multipart/form-data">
+                    <form action="/user/{{$usuario->nomeu}}" method="post" enctype="multipart/form-data">
+                        @method('PATCH')
+
                         <label><strong>Nome :</strong></label>
-                        <input class="form-control" name="nomeu" id="nomeu" type="text" placeholder="Nome">
+                        <input class="form-control" name="nomeu" id="nomeu" type="text" placeholder="Nome" autocomplete="off" value="{{old('name') ?? $usuario->nomeu}}">
                         @error('nomeu') <b style="color:red">{{$message}}</b> @enderror
                         <label><strong>Senha :</strong></label>
-                        <input class="form-control" name="senha" id="senha" type="password">
+                        <input class="form-control" name="senha" id="senha" type="password" autocomplete="off" value="{{old('name') ?? $usuario->senha}}">
                         @error('senha') <b style="color:red">{{$message}}</b> @enderror
                         <div class="form-group d-flex flex-column">
-                            <label for="imagem">Profile Image</label>
+                            <label for="imagem">Foto de Perfil</label>
                             <input type="file" name="imagem" class="py-2">
                             <div>{{ $errors->first('imagem') }}</div>
                         </div>

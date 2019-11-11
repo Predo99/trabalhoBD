@@ -35,6 +35,8 @@ Route::delete('/npcs/{npc}/{quest}', 'QuestController@destroy');
 
 Route::get('/user/create','UsuarioController@create');
 Route::post('/st','UsuarioController@store');
+Route::get('/user/{usuario}/edit','UsuarioController@edit');
+Route::patch('/user/{usuario}','UsuarioController@update');
 
 Route::get('/create','NpcController@create');
 Route::post('/', 'NpcController@store');

@@ -32,7 +32,7 @@
         <div class="bg-black" style="width:20%; height:100%; position:absolute; top:0; bottom:0;">
             <div>
                 <h1 style="text-align:center">{{$npc->nomen}}</h1>
-                <img src="{{asset('images/warrior.jpg')}}" id="profile_picture" alt=""></img>
+                <img src="data:image/jpeg;base64,{{$npc->imagem}}" id="profile_picture" alt=""></img>
             </div>
             <div>
                 <h3 style="display:inline-block; margin-left:3%">
