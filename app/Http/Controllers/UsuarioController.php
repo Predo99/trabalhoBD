@@ -64,5 +64,36 @@ class UsuarioController extends Controller
         return redirect('/');
     }
 
+    public function edit(Usuario $usuario){
+
+        return view('edituser',compact('usuario'));
+    }
+
+    public function update(Usuario $usuario){
+
+        if(request()->file('imagem')!=null) {
+            $imagem = $this->converterImagem(request()->file('imagem'));
+            DB::table('usuario')
+                ->where("usuario.nomeu", '=', $usuario->nomeu)
+                ->update(['usuario.gold' => $usuario->gold ,
+                          'usuario.nivel' => $usuario->nivel,
+                          'usuario.nomeu' => request()->input('nomeu'),
+                          'usuario.senha' => request()->input('senha'),
+                          'usuario.imagem' => $imagem ]);
+
+        }else{
+            DB::table('usuario')
+                ->where("usuario.nomeu", '=', $usuario->nomeu)
+                ->update(['usuario.gold' => $usuario->gold ,
+                    'usuario.nivel' => $usuario->nivel,
+                    'usuario.nomeu' => request()->input('nomeu'),
+                    'usuario.senha' => request()->input('senha'),
+                    'usuario.imagem' => null ]);
+        }
+
+
+        return redirect('/usuarios/'.request()->input('nomeu'));
+    }
+
 
 }

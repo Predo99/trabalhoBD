@@ -65,4 +65,86 @@ class NpcController extends Controller
         }
        return redirect('/');
     }
+
+    public function edit(Npc $npc){
+        return view('editnpc',compact('npc'));
+    }
+
+    public function update(Npc $npc){
+        if(request()->file('imagem')!=null) {
+            $imagem = $this->converterImagem(request()->file('imagem'));
+            DB::table('npc')
+                ->where("npc.tipo", '=', $npc->tipo)
+                ->update([
+                    'npc.tipo' => request()->input('tipo'),
+                    'npc.nomen' => request()->input('nomen'),
+                    'npc.senha' => request()->input('senha'),
+                    'usuario.imagem' => $imagem ]);
+        }else{
+            DB::table('npc')
+                ->where("npc.tipo", '=', $npc->tipo)
+                ->update([
+                    'npc.tipo' => request()->input('tipo'),
+                    'npc.nomen' => request()->input('nomen'),
+                    'npc.senha' => request()->input('senha'),
+                    'usuario.imagem' => null ]);
+        }
+
+        if(request()->file('bd1')!=null) {
+            $imagem = $this->converterImagem(request()->file('bd1'));
+            DB::table('badge')
+                ->where("nomeb",'=',$npc->tipo)
+                ->update([
+                    'badge.nomeb' => request()->input('tipo'),
+                    'badge.nivel' => 1,
+                    'badge.imagem' => $imagem
+                ]);
+
+        }else{
+            DB::table('badge')
+                ->where("nomeb",'=',$npc->tipo)
+                ->update([
+                    'badge.nomeb' => request()->input('tipo'),
+                    'badge.nivel' => 1,
+                    'badge.imagem' => null
+                ]);
+        }
+        if(request()->file('bd2')!=null) {
+            $imagem = $this->converterImagem(request()->file('bd2'));
+            DB::table('badge')
+                ->where("nomeb",'=',$npc->tipo.'3')
+                ->update([
+                    'badge.nomeb' => request()->input('tipo').'3',
+                    'badge.nivel' => 3,
+                    'badge.imagem' => $imagem
+                ]);
+        }else{
+            DB::table('badge')
+                ->where("nomeb",'=',$npc->tipo.'3')
+                ->update([
+                    'badge.nomeb' => request()->input('tipo').'3',
+                    'badge.nivel' => 3,
+                    'badge.imagem' => null
+                ]);
+        }
+        if(request()->file('bd3')!=null) {
+            $imagem = $this->converterImagem(request()->file('bd3'));
+            DB::table('badge')
+                ->where("nomeb",'=',$npc->tipo.'6')
+                ->update([
+                    'badge.nomeb' => request()->input('tipo').'6',
+                    'badge.nivel' => 6,
+                    'badge.imagem' => $imagem
+                ]);
+        }else{
+            DB::table('badge')
+                ->where("nomeb",'=',$npc->tipo.'6')
+                ->update([
+                    'badge.nomeb' => request()->input('tipo').'6',
+                    'badge.nivel' => 6,
+                    'badge.imagem' => null
+                ]);
+        }
+        return redirect('/npcs/'.request()->input('tipo'));
+    }
 }

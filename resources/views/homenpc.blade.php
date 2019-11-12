@@ -31,7 +31,8 @@
     <div class="row">
         <div class="bg-black" style="width:20%; height:100%; position:absolute; top:0; bottom:0;">
             <div>
-                <h1 style="text-align:center">{{$npc->nomen}}</h1>
+                <a href="/{{$npc->tipo}}/edit"><h1 style="text-align:center"  >{{$npc->nomen}}</h1></a>
+
                 <img src="data:image/jpeg;base64,{{$npc->imagem}}" id="profile_picture" alt=""></img>
             </div>
             <div>

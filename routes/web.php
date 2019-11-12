@@ -40,6 +40,8 @@ Route::patch('/user/{usuario}','UsuarioController@update');
 
 Route::get('/create','NpcController@create');
 Route::post('/', 'NpcController@store');
+Route::get('/{npc}/edit','NpcController@edit');
+Route::patch('/{npc}','NpcController@update');
 
 Route::get('/criar/{npc}', 'QuestController@create');
 Route::post('/criar/{npc}/st', 'QuestController@store');

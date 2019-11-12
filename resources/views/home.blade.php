@@ -4,9 +4,6 @@
 
 <style>
     body{
-        position: fixed;
-        top: 0;
-        left: 0;
         background-image: url('{{ asset ('images/tavern.jpg')}}');
         background-repeat: no-repeat;
         background-position: center center;
@@ -52,8 +49,11 @@
 @section('content')
     <div class="row">
         <div class="bg-black" style="width:20%; height:100%; position:absolute; top:0; bottom:0;">
+                <a href="">
+                    <i class="fa fa-fw fa-power-off" style="font-size: 30px; position:absolute; top:1%; left:2%; color:white;  "></i>
+                </a>
             <div>
-                <h1 style="text-align:center">{{$usuario->nomeu}}</h1>
+                <a href="/user/{{$usuario->nomeu}}/edit"><h1 style="text-align:center">{{$usuario->nomeu}}</h1></a>
                 <img src="data:image/jpeg;base64,{{$usuario->imagem}}" id="profile_picture" alt=""></img>
             </div>
             <div>
@@ -83,17 +83,14 @@
 
                         </h3></li>
                 @endforeach
+
             </div>
-            <div>
-                <a href="">
-                    <i class="fa fa-fw fa-power-off" style="font-size: 30px; position:absolute; bottom:1%; right:2%; color:white;  "></i>
-                </a>
-            </div>
+
         </div>
     </div>
 
     <div class="row">
-        <div class="bg-black" style="margin-left:30%; margin-right:10%; max-width:60%">
+        <div class="bg-black" style="margin-left:30%; margin-right:10%; max-width:60% ">
             <h1 style="text-align:center; padding-top:1%;">Missões</h1>
             <ul style="white-space:nowrap; padding-bottom:1%; margin-left:10%; margin-right:85%;">
                 @php
