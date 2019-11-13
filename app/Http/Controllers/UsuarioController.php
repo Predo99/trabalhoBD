@@ -20,21 +20,27 @@ class UsuarioController extends Controller
         return view ('home', compact('usuario'));
     }
 
-    // public function login ()
-    // {
-    //     $nome = request()->input('nome');
-    //     $senha = request()->input('senha');
+     public function login ()
+     {
+         $nome = request()->input('nome');
+         $senha = request()->input('senha');
 
-    //     $user = DB::select('select * from usuario where nomeu = ?', [$nome]);
+         $user = DB::select('select * from usuario where nomeu = ?', [$nome]);
 
-    //     if($user)
-    //     {
-    //         dd($senha);
-    //         if ($user[0]->senha == $senha)
-    //             dd($user[0]->senha);
-    //     }
-    //     dd($nome);
-    // }
+         if(!$user){
+             $user = DB::select('select * from npc where tipo = ?', [$nome]);
+
+             if($user){
+                 if ($user[0]->senha == $senha)
+                     return redirect('/npcs/'.$nome);
+             }
+         }
+         if($user){
+             if ($user[0]->senha == $senha)
+                 return redirect('/usuarios/'.$nome);
+         }
+         return redirect('/');
+     }
 
     public function create(){
         $usuario = new Usuario();

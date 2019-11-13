@@ -22,6 +22,7 @@ Auth::routes();
 // });
 
 Route::view('/', 'login');
+Route::post('/log','UsuarioController@login');
 // Route::view('/missao', 'missao');
 // Route::view('/home', 'home');
 

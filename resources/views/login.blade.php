@@ -23,11 +23,11 @@
         <div class="login-box-body">
             <h1 style="text-align:center; font-weight: bold;">LOGIN</h1>
             {{-- <p class="login-box-msg">{{ __('adminlte::adminlte.login_message') }}</p> --}}
-            <form action="" method="post" >
+            <form action="/log" method="post" >
                 {{ csrf_field() }}
 
                 <div class="form-group has-feedback {{ $errors->has('nomeu') ? 'has-error' : '' }}">
-                    <input type="text" name="nomeu" class="form-control" value="{{ old('nomeu') }}" placeholder="Nome">
+                    <input type="text" name="nome" class="form-control" value="{{ old('nomeu') }}" placeholder="Nome">
                     @if ($errors->has('nomeu'))
                         <span class="help-block">
                             <strong>{{ $errors->first('nomeu') }}</strong>

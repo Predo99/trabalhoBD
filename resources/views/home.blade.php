@@ -27,7 +27,7 @@
     }
 
     #badge_picture{
-        width: 45%;
+        width: 30%;
         height: 15%;
         border-radius: 50%;
         display: block;
@@ -48,7 +48,7 @@
 
 @section('content')
     <div class="row">
-        <div class="bg-black" style="width:20%; height:100%; position:absolute; top:0; bottom:0;">
+        <div class="bg-black" style="  width:20%; max-height:100%;  position:absolute; top:0; bottom:0;" >
                 <a href="">
                     <i class="fa fa-fw fa-power-off" style="font-size: 30px; position:absolute; top:1%; left:2%; color:white;  "></i>
                 </a>
@@ -69,7 +69,7 @@
                 </h3>
             </div>
             <div>
-                <h3 style="margin-left:3%">Badges: </h3>
+                <h3 style="margin-left:3%">Badges </h3>
                 @php
                     $badgesganhas = DB::select('select * from ganha where nomeu = ?', [$usuario->nomeu]);
                 @endphp
@@ -83,7 +83,6 @@
 
                         </h3></li>
                 @endforeach
-
             </div>
 
         </div>
@@ -105,6 +104,19 @@
                     </li>
                 @endforeach
             </ul>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="box box-default">
+                <div class="box-header with-border bg-black">
+                    <h3 class="box-title">Badges</h3>
+                </div>
+                <div class="box-body">
+
+                </div>
+            </div>
         </div>
     </div>
 @endsection
