@@ -64,6 +64,7 @@ class UsuarioController extends Controller
             DB::insert('insert into usuario (nomeu,gold,nivel,senha, imagem) values (?,?,?,?,?)',
                 [request()->input('nomeu'), 0, 1, request()->input('senha'), $imagem]);
         }else{
+
             DB::insert('insert into usuario (nomeu,gold,nivel,senha, imagem) values (?,?,?,?,?)',
                 [request()->input('nomeu'), 0, 1, request()->input('senha'), null]);
         }
@@ -94,7 +95,7 @@ class UsuarioController extends Controller
                     'usuario.nivel' => $usuario->nivel,
                     'usuario.nomeu' => request()->input('nomeu'),
                     'usuario.senha' => request()->input('senha'),
-                    'usuario.imagem' => null ]);
+                    'usuario.imagem' => null]);
         }
 
 

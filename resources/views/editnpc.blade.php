@@ -35,22 +35,22 @@
                         <input class="form-control" name="senha" id="senha" type="password" autocomplete="off" value="{{old('name') ?? $npc->senha}}">
                         @error('senha') <b style="color:red">{{$message}}</b> @enderror
                         <div class="form-group d-flex flex-column">
-                            <label for="imagem">Profile Image</label>
+                            <label for="imagem">Foto de Perfil</label>
                             <input type="file" name="imagem" class="py-2">
                             <div>{{ $errors->first('imagem') }}</div>
                         </div>
                         <div class="form-group d-flex flex-column">
-                            <label for="bd1">BD1 Image</label>
+                            <label for="bd1">Badge1 Image</label>
                             <input type="file" name="bd1" class="py-2">
                             <div>{{ $errors->first('bd1') }}</div>
                         </div>
                         <div class="form-group d-flex flex-column">
-                            <label for="bd2">BD2 Image</label>
+                            <label for="bd2">Badge2 Image</label>
                             <input type="file" name="bd2" class="py-2">
                             <div>{{ $errors->first('bd2') }}</div>
                         </div>
                         <div class="form-group d-flex flex-column">
-                            <label for="bd3">BD3 Image</label>
+                            <label for="bd3">Badge3 Image</label>
                             <input type="file" name="bd3" class="py-2">
                             <div>{{ $errors->first('bd3') }}</div>
                         </div>

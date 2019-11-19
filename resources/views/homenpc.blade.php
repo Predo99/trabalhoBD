@@ -32,8 +32,11 @@
         <div class="bg-black" style="width:20%; height:100%; position:absolute; top:0; bottom:0;">
             <div>
                 <a href="/{{$npc->tipo}}/edit"><h1 style="text-align:center"  >{{$npc->nomen}}</h1></a>
-
-                <img src="data:image/jpeg;base64,{{$npc->imagem}}" id="profile_picture" alt=""></img>
+                @if($npc->imagem == null)
+                    <img src="{{ asset ('images/npcdefault.jpg')}}" id="profile_picture" alt=""></img>
+                @else
+                    <img src="data:image/jpeg;base64,{{$npc->imagem}}" id="profile_picture" alt=""></img>
+                @endif
             </div>
             <div>
                 <h3 style="display:inline-block; margin-left:3%">
@@ -42,7 +45,7 @@
                 </h3>
             </div>
             <div>
-                <h3 style="margin-left:3%">Missoes: </h3>
+                <h3 style="margin-left:3%">Missões: </h3>
                 <ul>
                     @php
                     $missoes = DB::select('select * from quest where tipo = ?', [$npc->tipo]);
