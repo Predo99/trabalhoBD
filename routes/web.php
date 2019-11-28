@@ -22,7 +22,10 @@ Auth::routes();
 // });
 
 Route::view('/', 'login');
-Route::post('/log','UsuarioController@login');
+Route::view('/npc','lognpc');
+Route::post('/log','UsuarioController@loginU');
+Route::post('/logn','UsuarioController@loginN');
+
 // Route::view('/missao', 'missao');
 // Route::view('/home', 'home');
 

@@ -19,7 +19,7 @@
 
     #profile_picture{
         width: 65%;
-        height: 40%;
+        height: 30%;
         border-radius: 50%;
         display: block;
         margin-left: auto;
@@ -27,11 +27,11 @@
     }
 
     #badge_picture{
-        width: 27%;
+        width: 12%;
         height: 15%;
         border-radius: 50%;
         display: block;
-        margin-left: auto;
+        margin-left: 20%;
         margin-right: auto;
     }
 
@@ -46,12 +46,13 @@
 
 </style>
 
+
 @section('content')
     <div class="row">
-        <div class="bg-black" style="  width:20%; max-height:60%;  position:absolute; top:0; bottom:0;" >
-                <a href="">
-                    <a href="/"><i class="fa fa-fw fa-power-off"  style="font-size: 30px; position:absolute; bottom:1%; right:2%; color:white;  "></i></a>
-                </a>
+        <div class="bg-black" style="  width:25%; max-height:100%;  position:absolute; top:0; bottom:0;" >
+            <a href="">
+                <a href="/"><i class="fa fa-fw fa-power-off"  style="font-size: 30px; position:absolute; top:1%; left:2%; color:white;  "></i></a>
+            </a>
             <div>
                 <a href="/user/{{$usuario->nomeu}}/edit"><h1 style="text-align:center">{{$usuario->nomeu}}</h1></a>
                 @if($usuario->imagem == null)
@@ -74,6 +75,7 @@
             </div>
             <div>
                 <a data-dismiss="modal" data-toggle="modal" data-target="#modal-default"><h3 style="margin-left:3%">Ver Badges </h3></a>
+                <button class="btn bg-black hidden" data-dismiss="modal" data-toggle="modal" data-target="#modal">Responder</button>
 
             </div>
 
@@ -91,8 +93,8 @@
                 @foreach ($missoes as $missao)
                     <li class="a">
                         <a class="btn btn-primary"
-                        href="{{ route('quests.show', ['usuario' => $usuario->nomeu, 'quest' => $missao->id_quest]) }}" >
-                        <h3>{{$missao->tipo}}{{$missao->nivel}}</h3></a>
+                           href="{{ route('quests.show', ['usuario' => $usuario->nomeu, 'quest' => $missao->id_quest]) }}" >
+                            <h3>{{$missao->tipo}}{{$missao->nivel}}</h3></a>
                     </li>
                 @endforeach
             </ul>
@@ -129,4 +131,8 @@
             </div>
         </div>
     </div>
+
+
+
+
 @endsection

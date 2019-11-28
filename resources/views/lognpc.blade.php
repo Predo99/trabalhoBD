@@ -18,9 +18,9 @@
     <div class="box" style="width:20%; height:75%; margin:auto;margin:auto; margin-bottom: 30%; margin-top: 10%; ">
         <!-- /.login-logo -->
         <div class="box-body">
-            <h1 style="text-align:center; font-weight: bold;">LOGIN Usuário</h1>
+            <h1 style="text-align:center; font-weight: bold;">LOGIN NPC</h1>
             {{-- <p class="login-box-msg">{{ __('adminlte::adminlte.login_message') }}</p> --}}
-            <form action="/log" method="post" >
+            <form action="/logn" method="post" >
                 {{ csrf_field() }}
 
                 <div class="form-group has-feedback {{ $errors->has('nomeu') ? 'has-error' : '' }}">
@@ -52,8 +52,8 @@
             </form>
             <br>
             <p>
-                <a href="/user/create" class="text-center">
-                    Cadastrar usuário
+                <a href="/create" class="text-center">
+                    Cadastrar NPC
                 </a>
             </p>
         </div>

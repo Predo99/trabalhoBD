@@ -42,6 +42,7 @@ class QuestController extends Controller
 
                     DB::insert('insert into realiza (nomeu,id_quest,data_ini,data_fim,hora_ini,hora_fim) values(?,?,?,?,?,?)',
                         [$usuario->nomeu,$quest->id_quest,$data,$dataf,$hora,$horaf]);
+                    return redirect()->back()->with('mensagem', 'sim');
 
 
                 }else{
@@ -71,8 +72,8 @@ class QuestController extends Controller
                             [$usuario->nomeu,$quest->tipo.'3']);
                     }
                 }
+        return redirect()->back()->with('mensagem', 'nao');
 
-                return redirect('/usuarios/'.$usuario->nomeu );
 
     }
     // public function showq(Quest $quest)

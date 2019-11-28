@@ -20,7 +20,7 @@ class UsuarioController extends Controller
         return view ('home', compact('usuario'));
     }
 
-     public function login ()
+     public function loginU ()
      {
          $nome = request()->input('nome');
          $senha = request()->input('senha');
@@ -28,11 +28,9 @@ class UsuarioController extends Controller
          $user = DB::select('select * from usuario where nomeu = ?', [$nome]);
 
          if(!$user){
-             $user = DB::select('select * from npc where tipo = ?', [$nome]);
-
-             if($user){
-                 if ($user[0]->senha == $senha)
-                     return redirect('/npcs/'.$nome);
+             if($nome =='Guild Master'){
+                 if ($senha == '12345')
+                     return redirect('/npc');
              }
          }
          if($user){
@@ -41,6 +39,20 @@ class UsuarioController extends Controller
          }
          return redirect('/');
      }
+
+    public function loginN ()
+    {
+        $nome = request()->input('nome');
+        $senha = request()->input('senha');
+
+        $user = DB::select('select * from npc where tipo = ?', [$nome]);
+
+        if($user){
+            if ($user[0]->senha == $senha)
+                return redirect('/npcs/'.$user[0]->tipo);
+        }
+        return redirect('/');
+    }
 
     public function create(){
         $usuario = new Usuario();

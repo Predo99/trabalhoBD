@@ -29,7 +29,7 @@
 
 @section('content')
     <div class="row">
-        <div class="bg-black" style="width:20%; height:100%; position:absolute; top:0; bottom:0;">
+        <div class="bg-black" style="width:25%; max-height:100%;  position:absolute; top:0; bottom:0;">
             <div>
                 <a href="/{{$npc->tipo}}/edit"><h1 style="text-align:center"  >{{$npc->nomen}}</h1></a>
                 @if($npc->imagem == null)
@@ -57,20 +57,18 @@
                     @endforeach
                  </ul>
             </div>
-            <div>
-                <a href="">
-                    <i class="fa fa-fw fa-power-off" style="font-size: 30px; position:absolute; bottom:1%; right:2%; color:white;  "></i>
+                <a href="/npc">
+                    <i class="fa fa-fw fa-power-off" style="font-size: 30px; position:absolute; top: 1%; left: 2%; color:white;  "></i>
                 </a>
-            </div>
         </div>
     </div>
 
     <div class="row">
         <div class="bg-black" style="margin-left:30%; margin-right:10%; max-width:60%">
             <h1 style="text-align:center; padding-top:1%;">Criar missão</h1>
-            <div style="padding-left:27%; padding-bottom:1%">
-                <a class="btn btn-primary" href="/criar/{{$npc->tipo}}">
-                        <h3>Clique aqui para criar uma nova missão</h3>
+            <div style="padding-left:35%; padding-bottom:1%;  margin: auto" >
+                <a class="btn bg-blue" href="/criar/{{$npc->tipo}}">
+                        <h3 alt="" data-toggle="tooltip" data-placement="top" title="Clique aqui para adicionar uma nova missão">Criar missão</h3>
                 </a>
             </div>
 
