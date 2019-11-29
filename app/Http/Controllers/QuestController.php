@@ -22,11 +22,11 @@ class QuestController extends Controller
 
                 $perguntas = DB::select('select * from pergunta where id_quest =?',[$iquest]);
                 $count=0;
-               for($i=0;$i<3;$i++){
-                   if(request()->input('opcao'.$perguntas[$i]->id_pergunta.$perguntas[$i]->resposta)){
-                       $count++;
-                   }
-               }
+                for($i=0;$i<3;$i++){
+                    if(request()->input('opcao'.$perguntas[$i]->id_pergunta.$perguntas[$i]->resposta)){
+                        $count++;
+                    }
+                }
 
                 if($count>=2){
                     DB::table('usuario')
@@ -42,17 +42,16 @@ class QuestController extends Controller
 
                     DB::insert('insert into realiza (nomeu,id_quest,data_ini,data_fim,hora_ini,hora_fim) values(?,?,?,?,?,?)',
                         [$usuario->nomeu,$quest->id_quest,$data,$dataf,$hora,$horaf]);
-                    return redirect()->back()->with('mensagem', 'sim');
-
-
+                    $mensagem = 'sim';
                 }else{
                     DB::table('usuario')
                         ->where("usuario.nomeu", '=', $usuario->nomeu)
                         ->update(['usuario.gold' => $usuario->gold - ($quest->nivel/2)*500]);
+                    $mensagem = 'nao';
                 }
 
                   $teste=  DB::select('select count(*) from ganha where nomeu=? and nomeb=?',[$usuario->nomeu,$quest->tipo]);
-                  if($teste[0]->count ==0) {
+                  if($teste[0]->count == 0) {
                       DB::insert('insert into ganha (nomeu,nomeb) values (?,?)',
                           [$usuario->nomeu,$quest->tipo]);
                   }
@@ -72,7 +71,7 @@ class QuestController extends Controller
                             [$usuario->nomeu,$quest->tipo.'3']);
                     }
                 }
-        return redirect()->back()->with('mensagem', 'nao');
+        return redirect()->back()->with('mensagem', $mensagem);
 
 
     }
