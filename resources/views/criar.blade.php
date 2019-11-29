@@ -41,19 +41,19 @@
                         <lavel><strong>Marque a opção da Resposta Correta</strong></lavel>
                         <div class="radio">
                                 <label>
-                                    <input type="checkbox" name="opcao11" id="optionsRadios1" value=1 >
+                                    <input type="checkbox" name="opcao11" id="optionsRadios1" value=1 onclick="marcaDesmarca(this,1)">
                                     1
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="opcao12" id="optionsRadios2" value=2 >
+                                    <input type="checkbox" name="opcao12" id="optionsRadios2" value=2 onclick="marcaDesmarca(this,1)">
                                     2
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="opcao13" id="optionsRadios2" value=3 >
+                                    <input type="checkbox" name="opcao13" id="optionsRadios2" value=3 onclick="marcaDesmarca(this,1)">
                                     3
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="opcao14" id="optionsRadios2" value=4 >
+                                    <input type="checkbox" name="opcao14" id="optionsRadios2" value=4 onclick="marcaDesmarca(this,1)">
                                     4
                                 </label>
                         </div>
@@ -71,19 +71,19 @@
                         <lavel><strong>Marque a opção da Resposta Correta</strong></lavel>
                         <div class="radio">
                                 <label>
-                                    <input type="checkbox" name="opcao21" id="optionsRadios1" value=1 >
+                                    <input type="checkbox" name="opcao21" id="optionsRadios1" value=1 onclick="marcaDesmarca(this,2)">
                                     1
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="opcao22" id="optionsRadios2" value=2 >
+                                    <input type="checkbox" name="opcao22" id="optionsRadios2" value=2 onclick="marcaDesmarca(this,2)">
                                     2
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="opcao23" id="optionsRadios2" value=3 >
+                                    <input type="checkbox" name="opcao23" id="optionsRadios2" value=3 onclick="marcaDesmarca(this,2)">
                                     3
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="opcao24" id="optionsRadios2" value=4 >
+                                    <input type="checkbox" name="opcao24" id="optionsRadios2" value=4 onclick="marcaDesmarca(this,2)">
                                     4
                                 </label>
                         </div>
@@ -101,19 +101,19 @@
                         <lavel><strong>Marque a opção da Resposta Correta</strong></lavel>
                         <div class="radio">
                                 <label>
-                                    <input type="checkbox" name="opcao31" id="optionsRadios1" value=1 >
+                                    <input type="checkbox" name="opcao31" id="optionsRadios1" value=1 onclick="marcaDesmarca(this,3)">
                                     1
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="opcao32" id="optionsRadios2" value=2 >
+                                    <input type="checkbox" name="opcao32" id="optionsRadios2" value=2 onclick="marcaDesmarca(this,3)">
                                     2
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="opcao33" id="optionsRadios2" value=3 >
+                                    <input type="checkbox" name="opcao33" id="optionsRadios2" value=3 onclick="marcaDesmarca(this,3)">
                                     3
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="opcao34" id="optionsRadios2" value=4 >
+                                    <input type="checkbox" name="opcao34" id="optionsRadios2" value=4 onclick="marcaDesmarca(this,3)">
                                     4
                                 </label>
                         </div>
@@ -130,4 +130,24 @@
             </div>
 
         </div>
+    <script>
+        function marcaDesmarca(caller,id) {
+            var checks = document.querySelectorAll('input[type="checkbox"]');
+            if(id==1){
+                for(let i = 0; i <=3; i++) {
+                    checks[i].checked = checks[i] == caller;
+                }
+            }
+            if (id==2) {
+                for (let i = 4; i <= 7; i++) {
+                    checks[i].checked = checks[i] == caller;
+                }
+            }
+            if (id==3) {
+                for (let i = 8; i <= 11; i++) {
+                    checks[i].checked = checks[i] == caller;
+                }
+            }
+        }
+    </script>
 @endsection

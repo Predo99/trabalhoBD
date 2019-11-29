@@ -50,10 +50,10 @@ class QuestController extends Controller
                     $mensagem = 'nao';
                 }
 
-                  $teste=  DB::select('select count(*) from ganha where nomeu=? and nomeb=?',[$usuario->nomeu,$quest->tipo]);
+                  $teste=  DB::select('select count(*) from ganha where nomeu=? and nomeb=?',[$usuario->nomeu,$quest->tipo.'1']);
                   if($teste[0]->count == 0) {
                       DB::insert('insert into ganha (nomeu,nomeb) values (?,?)',
-                          [$usuario->nomeu,$quest->tipo]);
+                          [$usuario->nomeu,$quest->tipo.'1']);
                   }
                 if($usuario->nivel>=3){
                     $tester=  DB::select('select count(*) from realiza as r, quest as q  where nomeu=? and q.tipo = ? and q.id_quest=r.id_quest',
@@ -68,7 +68,7 @@ class QuestController extends Controller
                         [$usuario->nomeu,$quest->tipo]);
                     if($tester[0]->count == 6){
                         DB::insert('insert into ganha (nomeu,nomeb) values (?,?)',
-                            [$usuario->nomeu,$quest->tipo.'3']);
+                            [$usuario->nomeu,$quest->tipo.'6']);
                     }
                 }
         return redirect()->back()->with('mensagem', $mensagem);

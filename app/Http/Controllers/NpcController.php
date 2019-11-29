@@ -41,27 +41,27 @@ class NpcController extends Controller
 
         if(request()->file('bd1')!=null) {
             $imagem = $this->converterImagem(request()->file('bd1'));
-            DB::insert('insert into badge (nomeb,nivel,imagem) values (?,?,?)',
-                [request()->input('tipo'), 1,$imagem]);
+            DB::insert('insert into badge (nomeb,imagem) values (?,?)',
+                [request()->input('tipo').'1',$imagem]);
         }else{
-            DB::insert('insert into badge (nomeb,nivel,imagem) values (?,?,?)',
-                [request()->input('tipo'), 1,null]);
+            DB::insert('insert into badge (nomeb,imagem) values (?,?)',
+                [request()->input('tipo').'1',null]);
         }
         if(request()->file('bd2')!=null) {
             $imagem = $this->converterImagem(request()->file('bd2'));
-            DB::insert('insert into badge (nomeb,nivel,imagem) values (?,?,?)',
-                [request()->input('tipo').'3', 3,$imagem]);
+            DB::insert('insert into badge (nomeb,imagem) values (?,?)',
+                [request()->input('tipo').'3',$imagem]);
         }else{
-            DB::insert('insert into badge (nomeb,nivel,imagem) values (?,?,?)',
-                [request()->input('tipo').'3', 3,null]);
+            DB::insert('insert into badge (nomeb,imagem) values (?,?)',
+                [request()->input('tipo').'3',null]);
         }
         if(request()->file('bd3')!=null) {
             $imagem = $this->converterImagem(request()->file('bd3'));
-            DB::insert('insert into badge (nomeb,nivel,imagem) values (?,?,?)',
-                [request()->input('tipo').'6', 6,$imagem]);
+            DB::insert('insert into badge (nomeb,imagem) values (?,?)',
+                [request()->input('tipo').'6',$imagem]);
         }else{
-            DB::insert('insert into badge (nomeb,nivel,imagem) values (?,?,?)',
-                [request()->input('tipo').'6', 6,null]);
+            DB::insert('insert into badge (nomeb,imagem) values (?,?)',
+                [request()->input('tipo').'6',null]);
         }
        return redirect('/npc');
     }
@@ -95,8 +95,7 @@ class NpcController extends Controller
             DB::table('badge')
                 ->where("nomeb",'=',$npc->tipo)
                 ->update([
-                    'badge.nomeb' => request()->input('tipo'),
-                    'badge.nivel' => 1,
+                    'badge.nomeb' => request()->input('tipo').'1',
                     'badge.imagem' => $imagem
                 ]);
 
@@ -104,8 +103,7 @@ class NpcController extends Controller
             DB::table('badge')
                 ->where("nomeb",'=',$npc->tipo)
                 ->update([
-                    'badge.nomeb' => request()->input('tipo'),
-                    'badge.nivel' => 1,
+                    'badge.nomeb' => request()->input('tipo').'1',
                     'badge.imagem' => null
                 ]);
         }
@@ -115,7 +113,6 @@ class NpcController extends Controller
                 ->where("nomeb",'=',$npc->tipo.'3')
                 ->update([
                     'badge.nomeb' => request()->input('tipo').'3',
-                    'badge.nivel' => 3,
                     'badge.imagem' => $imagem
                 ]);
         }else{
@@ -123,7 +120,6 @@ class NpcController extends Controller
                 ->where("nomeb",'=',$npc->tipo.'3')
                 ->update([
                     'badge.nomeb' => request()->input('tipo').'3',
-                    'badge.nivel' => 3,
                     'badge.imagem' =>null
                 ]);
         }
@@ -133,7 +129,6 @@ class NpcController extends Controller
                 ->where("nomeb",'=',$npc->tipo.'6')
                 ->update([
                     'badge.nomeb' => request()->input('tipo').'6',
-                    'badge.nivel' => 6,
                     'badge.imagem' => $imagem
                 ]);
         }else{
@@ -141,7 +136,6 @@ class NpcController extends Controller
                 ->where("nomeb",'=',$npc->tipo.'6')
                 ->update([
                     'badge.nomeb' => request()->input('tipo').'6',
-                    'badge.nivel' => 6,
                     'badge.imagem' => null
                 ]);
         }

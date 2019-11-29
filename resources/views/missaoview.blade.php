@@ -12,10 +12,10 @@
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-        height: 100vh;    
+        height: 100vh;
         /* Preserve aspet ratio */
-        min-width: 100%;   
-        min-height: 100%;   
+        min-width: 100%;
+        min-height: 100%;
     }
 
 </style>
@@ -45,19 +45,16 @@
                                         </ul>
                                     </div>
                                 </div>
-                            @endforeach  
+                            @endforeach
                         </div>
                         <hr>
                     @endforeach
                     <form action="/npcs/{{$npc->tipo}}/{{$quest->id_quest}}" method="post">
                         @method('DELETE')
                         @csrf
-
-                        <a href="#" class="btn bg-black">Editar</a>
-
                         <button type="submit" class="btn bg-black">Excluir</button>
                     </form>
-                </div> 
+                </div>
 
             </div>
 

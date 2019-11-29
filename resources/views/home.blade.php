@@ -33,6 +33,7 @@
         display: block;
         margin-left: 20%;
         margin-right: auto;
+        padding-bottom: 1%;
     }
 
     li.a{
@@ -94,7 +95,7 @@
                     <li class="a">
                         <a class="btn btn-primary"
                            href="{{ route('quests.show', ['usuario' => $usuario->nomeu, 'quest' => $missao->id_quest]) }}" >
-                            <h3>{{$missao->tipo}}{{$missao->nivel}}</h3></a>
+                            <h3>Missão {{$missao->nivel}}</h3></a>
                     </li>
                 @endforeach
             </ul>
@@ -116,15 +117,15 @@
                             $badge = DB::select('select * from badge where nomeb = ?', [$badgeganha->nomeb]);
                         @endphp
                         @if($badge[0]->imagem ==null)
-                            @if($badge[0]->nivel==1)
-                                <img src="{{ asset ('images/bdf1.jpg')}}" id="badge_picture" alt="" data-toggle="tooltip" data-placement="top" title="{{$badge[0]->nomeb}} {{$badge[0]->nivel}}"></img>
-                            @elseif($badge[0]->nivel==3)
-                                <img src="{{ asset ('images/bdf2.jpg')}}" id="badge_picture" alt="" data-toggle="tooltip" data-placement="top" title="{{$badge[0]->nomeb}} {{$badge[0]->nivel}}"></img>
-                            @elseif($badge[0]->nivel==6)
-                                <img src="{{ asset ('images/bdf3.jpg')}}" id="badge_picture" alt="" data-toggle="tooltip" data-placement="top" title="{{$badge[0]->nomeb}} {{$badge[0]->nivel}}"></img>
+                            @if(substr($badge[0]->nomeb,-1)=='1')
+                                <img src="{{ asset ('images/bdf1.jpg')}}" id="badge_picture" alt="" data-toggle="tooltip" data-placement="top" title="{{$badge[0]->nomeb}}"></img>
+                            @elseif(substr($badge[0]->nomeb,-1)=='3')
+                                <img src="{{ asset ('images/bdf2.jpg')}}" id="badge_picture" alt="" data-toggle="tooltip" data-placement="top" title="{{$badge[0]->nomeb}}"></img>
+                            @elseif(substr($badge[0]->nomeb,-1)=='6')
+                                <img src="{{ asset ('images/bdf3.jpg')}}" id="badge_picture" alt="" data-toggle="tooltip" data-placement="top" title="{{$badge[0]->nomeb}}"></img>
                             @endif
                         @else
-                            <img src="data:image/jpeg;base64,{{$badge[0]->imagem}}" id="badge_picture" alt="" data-toggle="tooltip" data-placement="top" title="{{$badge[0]->nomeb}} {{$badge[0]->nivel}}"0></img>
+                            <img src="data:image/jpeg;base64,{{$badge[0]->imagem}}" id="badge_picture" alt="" data-toggle="tooltip" data-placement="top" title="{{$badge[0]->nomeb}}"></img>
                         @endif
                     @endforeach
                 </div>
