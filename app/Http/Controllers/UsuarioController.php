@@ -51,7 +51,7 @@ class UsuarioController extends Controller
             if ($user[0]->senha == $senha)
                 return redirect('/npcs/'.$user[0]->tipo);
         }
-        return redirect('/');
+        return redirect('/npc');
     }
 
     public function create(){
